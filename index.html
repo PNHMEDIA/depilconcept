@@ -2924,11 +2924,26 @@ html {
     // --- 1. PAGE LOAD SCROLL ---
     // This safely scrolls the page down by 100px on load.
     // --- 1. PAGE LOAD SCROLL (MOBILE ONLY) ---
-if (window.innerWidth <= 768) {
-    setTimeout(function() {
-        window.scrollTo({ top: 100, behavior: 'auto' });
-    }, 10);
-}
+// --- 1. PAGE LOAD SCROLL (DESKTOP ONLY) ---
+document.addEventListener('DOMContentLoaded', function() {
+    // ... all your other code (mobile menu, GSAP, stats, etc.) remains here ...
+}); // <--- End of your existing main function
+
+// ADD THE NEW, CORRECTED CODE BLOCK HERE:
+window.addEventListener('load', function() {
+    let scrollAmount;
+
+    if (window.innerWidth > 768) {
+      // This is for DESKTOP (screens wider than 768px)
+      scrollAmount = 100;
+    } else {
+      // This is for MOBILE (screens 768px or narrower)
+      scrollAmount = 80;
+    }
+
+    // Perform the scroll after everything has loaded
+    window.scrollTo({ top: scrollAmount, behavior: 'auto' });
+});
 
     // --- 2. MOBILE MENU ---
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');

@@ -1,0 +1,3108 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DepilConcept Košice</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- General Setup & Variables --- */
+        :root {
+            --primary-teal: #009ca6;
+            --dark-teal: #007f87;
+            --light-bg: #f8f9fa;
+            --text-color: #333;
+            --text-light: #6c757d;
+            --white-color: #ffffff;
+            --border-color: #e0e0e0;
+            --primary-font: 'Poppins', sans-serif;
+            --shadow-light: 0 4px 20px rgba(0, 156, 166, 0.1);
+            --shadow-medium: 0 8px 30px rgba(0, 156, 166, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--primary-font);
+            background-color: var(--white-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- Header --- */
+        .main-header {
+            background-color: var(--white-color);
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+            z-index: 100;
+        }
+
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-placeholder {
+            font-weight: 700;
+            font-size: 24px;
+            color: var(--primary-teal);
+        }
+
+        .main-nav ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .main-nav a:hover {
+            color: var(--primary-teal);
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s ease;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+            font-family: var(--primary-font);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-teal);
+            color: var(--white-color);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--dark-teal);
+        }
+
+        .btn-secondary {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 2px solid var(--white-color);
+            color: var(--white-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--white-color);
+            color: var(--primary-teal);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 4px;
+            padding: 8px;
+        }
+
+        .mobile-menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--primary-teal);
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .mobile-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* --- HERO SECTION (FIXED) --- */
+        .hero-section {
+    padding: 60px 40px; /* This adds space around the wide container */
+    background-color: var(--light-bg);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box; /* Important for correct padding calculation */
+}
+
+        .hero-slider-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 40px;
+            background-image: url('https://placehold.co/1200x500/009ca6/cccccc?text=Clinic+Background');
+            background-size: cover;
+            background-position: center;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .hero-slider-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 127, 135, 0.7);
+            z-index: 1;
+        }
+
+        .hero-slider-track {
+            display: flex;
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            min-height: 90vh;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hero-slide {
+            min-width: 100%;
+            width: 100%;
+            flex-shrink: 0;
+            background-color: transparent;
+            color: var(--white-color);
+            padding: 80px 70px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 30px;
+            box-sizing: border-box;
+            min-height: 90vh;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 2;
+            width: 100%;
+        }
+        
+        .hero-content h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin: 0 0 25px 0;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 20px;
+            margin: 0 0 40px 0;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-image-area {
+            position: relative;
+            flex-shrink: 0;
+            margin-top: 20px;
+        }
+
+        .hero-image {
+            width: 500px;
+            height: 300px;
+            border-radius: 20px;
+            background-size: cover;
+            background-position: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color);
+            font-size: 28px;
+            font-weight: 600;
+            margin: 0 auto;
+        }
+        
+        .hero-nav {
+            position: absolute;
+            top: 50%;
+            left: 30px;
+            right: 30px;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            z-index: 10;
+        }
+        
+        .hero-nav .arrow {
+            background-color: rgba(255, 255, 255, 0.8);
+            color: var(--primary-teal);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .hero-nav .arrow:hover {
+            background-color: var(--white-color);
+            transform: scale(1.1);
+        }
+        
+        .hero-dots {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 10;
+        }
+        
+        .hero-dots .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .hero-dots .dot.active {
+            background-color: var(--white-color);
+            transform: scale(1.2);
+        }
+
+        /* --- BENEFITS SECTION --- */
+        .benefits-section {
+            padding: 80px 0;
+            background-color: var(--white-color);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-header .section-number {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-teal);
+            margin-bottom: 5px;
+        }
+
+        .section-header h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin: 0 0 15px 0;
+            color: var(--text-color);
+        }
+        
+        .section-header .tagline {
+            font-size: 18px;
+            color: var(--text-light);
+            margin: 0;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .benefit-item {
+            text-align: center;
+            padding: 20px;
+            border-radius: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .benefit-item:hover {
+            transform: translateY(-8px);
+        }
+
+        .benefit-item .icon-wrapper {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary-teal), var(--dark-teal));
+            color: var(--white-color);
+            margin: 0 auto 20px;
+            transition: all 0.3s;
+            box-shadow: var(--shadow-light);
+        }
+        
+        .benefit-item:hover .icon-wrapper {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .benefit-item svg {
+            width: 36px;
+            height: 36px;
+            stroke-width: 1.5;
+        }
+
+        .benefit-item p {
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 1.4;
+            margin: 0;
+            color: var(--text-color);
+        }
+
+        /* --- SERVICES SECTION (IMPROVED DESIGN) --- */
+        .our-services-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            position: relative;
+        }
+
+        .our-services-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23009ca6" opacity="0.03"/><circle cx="75" cy="75" r="1" fill="%23009ca6" opacity="0.03"/><circle cx="50" cy="10" r="1" fill="%23009ca6" opacity="0.03"/><circle cx="10" cy="60" r="1" fill="%23009ca6" opacity="0.03"/><circle cx="90" cy="40" r="1" fill="%23009ca6" opacity="0.03"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;
+            pointer-events: none;
+        }
+
+        .services-card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .service-card {
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            border: 1px solid rgba(0, 156, 166, 0.1);
+            border-radius: 24px;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 32px rgba(0, 156, 166, 0.08);
+            position: relative;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-teal), var(--dark-teal));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(0, 156, 166, 0.15);
+            border-color: var(--primary-teal);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .service-card-image {
+            width: 100%;
+            height: 220px;
+            background-color: var(--light-bg);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover .service-card-image img {
+            transform: scale(1.1);
+        }
+
+        .service-card-content {
+            padding: 35px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            background: var(--white-color);
+        }
+        
+        .service-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0 0 15px 0;
+            color: var(--text-color);
+            line-height: 1.3;
+        }
+
+        .service-card > .service-card-content > p {
+            color: var(--text-light);
+            line-height: 1.7;
+            margin: 0 0 25px 0;
+            flex-grow: 1;
+            font-size: 15px;
+        }
+
+        .service-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 30px 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        
+        .service-features li {
+            position: relative;
+            padding-left: 28px;
+            font-size: 14px;
+            color: var(--text-color);
+            line-height: 1.5;
+            font-weight: 500;
+        }
+
+        .service-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--primary-teal);
+            font-weight: 700;
+            font-size: 16px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgba(0, 156, 166, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .service-card .btn-tertiary {
+            color: var(--primary-teal);
+            font-weight: 600;
+            text-decoration: none;
+            margin-top: auto;
+            padding: 12px 24px;
+            border: 2px solid var(--primary-teal);
+            border-radius: 50px;
+            text-align: center;
+            transition: all 0.3s ease;
+            background: transparent;
+        }
+
+        .service-card .btn-tertiary:hover {
+            background: var(--primary-teal);
+            color: var(--white-color);
+            transform: translateY(-2px);
+        }
+
+        /* --- SLIDING SECTION (IMPROVED MOBILE) --- */
+        .sliding-section-wrapper {
+            padding: 120px 0 60px 0;
+            background-color: var(--light-bg);
+        }
+
+        .sliding-panel-container {
+            position: relative;
+            min-height: 600px;
+            border-radius: 40px;
+            overflow: hidden;
+        }
+
+        .panel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px;
+            box-sizing: border-box;
+            min-height: 600px;
+        }
+
+        .about-us-panel {
+            background-color: var(--white-color);
+            z-index: 1;
+        }
+
+        .shr-panel {
+            background-color: var(--primary-teal);
+            z-index: 2;
+            transform: translateY(100%);
+            color: var(--white-color);
+        }
+
+        .shr-panel h3, .shr-panel h2 {
+            color: var(--white-color);
+        }
+        
+        .shr-panel .section-header .tagline,
+        .shr-panel .shr-text-content p {
+            color: rgba(255,255,255,0.9);
+        }
+
+        .shr-panel .shr-benefit-icon {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: var(--white-color);
+        }
+
+        .about-us-grid,
+        .shr-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 60px;
+            align-items: center;
+            width: 100%;
+            max-width: 1100px;
+        }
+
+        .shr-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .about-us-text p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--text-light);
+        }
+
+        .about-us-points .point-item {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(0, 156, 166, 0.05);
+            border-radius: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .about-us-points .point-item:hover {
+            transform: translateX(10px);
+        }
+
+        .about-us-points .point-item:last-child { 
+            margin-bottom: 0; 
+        }
+
+        .about-us-points .point-icon {
+            flex-shrink: 0;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-teal), var(--dark-teal));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white-color);
+            box-shadow: var(--shadow-light);
+        }
+
+        .about-us-points .point-icon svg { 
+            width: 26px; 
+            height: 26px; 
+        }
+
+        .about-us-points h3 { 
+            margin: 0 0 8px 0; 
+            font-size: 18px; 
+            font-weight: 600; 
+            color: var(--text-color);
+        }
+
+        .about-us-points p { 
+            margin: 0; 
+            color: var(--text-light); 
+            font-size: 15px; 
+            line-height: 1.6; 
+        }
+
+        .shr-text-content p {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .shr-benefits {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .shr-benefit-item { 
+            display: flex; 
+            align-items: flex-start; 
+            gap: 15px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .shr-benefit-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .shr-benefit-icon {
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .shr-benefit-icon svg { 
+            width: 24px; 
+            height: 24px; 
+        }
+
+        .shr-benefit-item h3 { 
+            margin: 0 0 6px 0; 
+            font-size: 17px; 
+            font-weight: 600; 
+        }
+
+        .shr-benefit-item p { 
+            margin: 0; 
+            font-size: 14px; 
+            line-height: 1.5; 
+            opacity: 0.9;
+        }
+
+        /* --- STATS SECTION --- */
+        .stats-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary-teal), var(--dark-teal));
+            color: var(--white-color);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 30px 20px;
+            position: relative;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .stat-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -20px;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 60%;
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--white-color);
+            line-height: 1.1;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .stat-text {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.5;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        /* --- LOCATIONS SECTION --- */
+        .locations-v2-section {
+            padding: 100px 0;
+            background-color: var(--light-bg);
+            overflow: hidden;
+        }
+
+        .locations-v2-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .locations-v2-header h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .locations-v2-header p {
+            font-size: 18px;
+            color: var(--text-light);
+            margin: 0;
+        }
+        
+        .locations-v2-main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            position: relative;
+            align-items: start;
+        }
+        
+        .locations-v2-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            z-index: 2;
+        }
+
+        .location-v2-card {
+            background-color: var(--white-color);
+            border: 2px solid var(--border-color);
+            border-radius: 20px;
+            padding: 30px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .location-v2-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 156, 166, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .location-v2-card:hover::before {
+            left: 100%;
+        }
+        
+        .location-v2-card.is-active,
+        .location-v2-card:hover {
+            border-color: var(--primary-teal);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .location-v2-card h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin: 0 0 12px 0;
+            color: var(--primary-teal);
+        }
+
+        .location-v2-card p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--text-light);
+            margin: 0 0 15px 0;
+        }
+
+        .location-v2-address {
+            margin-top: 15px;
+            font-style: normal;
+            font-size: 14px;
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        .locations-v2-image-viewer {
+            position: sticky;
+            top: 120px;
+            height: 500px;
+            border-radius: 24px;
+            overflow: hidden;
+            background-color: var(--light-bg);
+            z-index: 1;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .location-v2-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transform: scale(1.1);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .location-v2-image.is-active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* --- CONTACT SECTION --- */
+        .contact-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--dark-teal), var(--primary-teal));
+            color: var(--white-color);
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .contact-header h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin: 0 0 15px 0;
+        }
+
+        .contact-header p {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .contact-main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 50px;
+            border-radius: 24px;
+            align-items: flex-start;
+        }
+
+        .contact-details h3 {
+            font-size: 24px;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .contact-card {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateX(10px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .contact-card:last-child {
+            margin-bottom: 0;
+        }
+        
+        .contact-card .icon-wrapper {
+            flex-shrink: 0;
+            margin-top: 5px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .contact-card .icon-wrapper svg {
+            width: 24px;
+            height: 24px;
+            stroke-width: 2;
+        }
+
+        .contact-card h4 {
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0 0 8px 0;
+            opacity: 0.8;
+        }
+
+        .contact-card p, .contact-card a {
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 1.6;
+            margin: 0;
+            color: var(--white-color);
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .contact-card a:hover {
+            opacity: 0.8;
+        }
+
+        .contact-card address {
+            font-style: normal;
+        }
+        
+        .contact-form-wrapper h3 {
+            font-size: 24px;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        
+
+        .btn-submit {
+            padding: 16px 32px;
+            border-radius: 50px;
+            border: none;
+            background-color: var(--white-color);
+            color: var(--primary-teal);
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+        
+        .btn-submit:hover {
+            background-color: #f0f0f0;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        /* --- FOOTER --- */
+        .site-footer {
+            padding: 80px 0 0 0;
+            background-color: var(--text-color);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 15px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 50px;
+            padding-bottom: 40px;
+        }
+
+        .footer-about h3 {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--white-color);
+            margin: 0 0 20px 0;
+        }
+
+        .footer-about p {
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .footer-links h4 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--white-color);
+            margin: 0 0 25px 0;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--white-color);
+        }
+
+        .footer-bottom {
+            padding: 25px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .footer-bottom p {
+            margin: 0;
+            opacity: 0.8;
+        }
+
+        /* === RESPONSIVE DESIGN === */
+        @media (max-width: 1200px) {
+            .hero-slide {
+                padding: 60px 50px;
+            }
+            
+            .hero-content h1 {
+                font-size: 42px;
+            }
+            
+            .hero-image {
+                width: 450px;
+                height: 280px;
+            }
+
+            .services-card-grid {
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            }
+        }
+
+        @media (max-width: 992px) {
+            /* Mobile Navigation */
+            .mobile-menu-toggle {
+                display: flex;
+            }
+            
+            .main-nav {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 85%;
+                max-width: 400px;
+                height: 100vh;
+                background-color: var(--white-color);
+                z-index: 999;
+                transition: left 0.3s ease;
+                box-shadow: 2px 0 20px rgba(0,0,0,0.1);
+                padding-top: 80px;
+            }
+            
+            .main-nav.active {
+                left: 0;
+            }
+            
+            .main-nav ul {
+                flex-direction: column;
+                padding: 0 30px;
+                gap: 0;
+            }
+            
+            .main-nav li {
+                border-bottom: 1px solid var(--border-color);
+            }
+            
+            .main-nav a {
+                display: block;
+                padding: 20px 0;
+                font-size: 18px;
+            }
+
+            /* Hero Section */
+            .hero-section {
+                min-height: 85vh;
+            }
+            
+            .hero-slider-container {
+                min-height: 80vh;
+                border-radius: 30px;
+            }
+            
+            .hero-slider-track {
+                min-height: 80vh;
+            }
+            
+            .hero-slide {
+                min-height: 80vh;
+                padding: 50px 40px;
+                gap: 25px;
+            }
+            
+            .hero-content h1 {
+                font-size: 36px;
+            }
+            
+            .hero-content p {
+                font-size: 18px;
+            }
+            
+            .hero-image {
+                width: 400px;
+                height: 250px;
+                font-size: 24px;
+            }
+
+            /* Services */
+            .services-card-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 30px;
+            }
+
+            /* Sliding Panels - DISABLE ON TABLET/MOBILE */
+            .sliding-panel-container {
+                min-height: auto;
+            }
+
+            .panel {
+                position: relative;
+                min-height: auto;
+                padding: 60px 40px;
+            }
+
+            .shr-panel {
+                transform: none;
+                margin-top: 40px;
+            }
+
+            .about-us-grid, .shr-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            /* Stats */
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+            
+            .stat-item:nth-child(2)::after {
+                display: none;
+            }
+
+            /* Locations */
+            .locations-v2-main {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .locations-v2-image-viewer {
+                position: relative;
+                top: 0;
+                height: 400px;
+                order: -1;
+            }
+
+            /* Contact */
+            .contact-main-grid {
+                grid-template-columns: 1fr;
+                gap: 50px;
+                padding: 40px;
+            }
+
+            /* Footer */
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            /* Hero */
+            .hero-section {
+                min-height: 80vh;
+            }
+            
+            .hero-slider-container {
+                min-height: 75vh;
+                border-radius: 25px;
+            }
+            
+            .hero-slider-track {
+                min-height: 75vh;
+            }
+            
+            .hero-slide {
+                min-height: 75vh;
+                padding: 40px 30px;
+                gap: 20px;
+            }
+            
+            .hero-content h1 {
+                font-size: 32px;
+                margin-bottom: 20px;
+            }
+            
+            .hero-content p {
+                font-size: 16px;
+                margin-bottom: 30px;
+            }
+            
+            .hero-image {
+                width: 320px;
+                height: 200px;
+                font-size: 20px;
+            }
+
+            .hero-nav .arrow {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+
+            /* Section Spacing */
+            .our-services-section,
+            .benefits-section,
+            .sliding-section-wrapper,
+            .stats-section,
+            .locations-v2-section,
+            .contact-section,
+            .site-footer {
+                padding: 60px 0;
+            }
+
+            .sliding-section-wrapper {
+                padding: 80px 0 40px 0;
+            }
+
+            /* Services */
+            .services-card-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .service-card-content {
+                padding: 25px;
+            }
+
+            .service-features {
+                grid-template-columns: 1fr;
+            }
+
+            /* Benefits */
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            /* Panels */
+            .panel {
+                padding: 40px 20px;
+            }
+
+            .shr-benefits {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            /* Stats */
+            .stat-item {
+                padding: 25px 15px;
+            }
+
+            .stat-number {
+                font-size: 36px;
+            }
+
+            /* Contact */
+            .contact-main-grid {
+                padding: 30px 20px;
+            }
+
+            .contact-card {
+                gap: 15px;
+                margin-bottom: 25px;
+                padding: 15px;
+            }
+
+            .contact-card .icon-wrapper {
+                width: 40px;
+                height: 40px;
+            }
+
+            /* Footer */
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            /* Hero */
+            .hero-section {
+                min-height: 75vh;
+            }
+            
+            .hero-slider-container {
+                min-height: 70vh;
+                border-radius: 20px;
+            }
+            
+            .hero-slider-track {
+                min-height: 70vh;
+            }
+            
+            .hero-slide {
+                min-height: 70vh;
+                padding: 30px 20px;
+                gap: 15px;
+            }
+            
+            .hero-content h1 {
+                font-size: 28px;
+                line-height: 1.3;
+            }
+            
+            .hero-content p {
+                font-size: 15px;
+                margin-bottom: 25px;
+            }
+            
+            .hero-image {
+                width: 280px;
+                height: 180px;
+                font-size: 18px;
+            }
+
+            /* Section Headers */
+            .section-header h2 {
+                font-size: 28px;
+            }
+            
+            .section-header .tagline {
+                font-size: 16px;
+            }
+
+            /* General Spacing */
+            .our-services-section,
+            .benefits-section,
+            .sliding-section-wrapper,
+            .stats-section,
+            .locations-v2-section,
+            .contact-section {
+                padding: 40px 0;
+            }
+
+            /* Benefits */
+            .benefits-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                max-width: 300px;
+                margin: 0 auto;
+            }
+
+            .benefit-item .icon-wrapper {
+                width: 70px;
+                height: 70px;
+            }
+
+            .benefit-item svg {
+                width: 32px;
+                height: 32px;
+            }
+
+            /* Stats */
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            
+            .stat-item:not(:last-child)::after {
+                display: none;
+            }
+
+            .stat-number {
+                font-size: 32px;
+            }
+
+            .stat-text {
+                font-size: 14px;
+            }
+
+            /* Contact */
+            .contact-main-grid {
+                padding: 25px 15px;
+            }
+            
+            .contact-header h2 {
+                font-size: 28px;
+            }
+            
+            .contact-header p {
+                font-size: 16px;
+            }
+
+            /* Buttons */
+            .btn {
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+
+            .btn-submit {
+                padding: 14px 24px;
+            }
+        }
+
+        /* Animation Classes */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-content {
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-image {
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        /* Disable animations on mobile for better performance */
+        @media (max-width: 768px) {
+            .service-card,
+            .benefit-item .icon-wrapper,
+            .location-v2-card,
+            .about-us-points .point-item,
+            .shr-benefit-item,
+            .stat-item,
+            .contact-card {
+                transition: none !important;
+            }
+            
+            .service-card:hover,
+            .benefit-item:hover .icon-wrapper,
+            .location-v2-card:hover,
+            .about-us-points .point-item:hover,
+            .shr-benefit-item:hover,
+            .stat-item:hover,
+            .contact-card:hover {
+                transform: none !important;
+            }
+        }
+
+
+        /* === IMPROVED SLIDING SECTION === */
+.sliding-section-wrapper {
+    padding: 120px 0 60px 0;
+    background-color: var(--light-bg);
+}
+
+.sliding-panel-container {
+    position: relative;
+    height: 100vh;
+    max-height: 800px;
+    min-height: 600px;
+    border-radius: 40px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 156, 166, 0.1);
+}
+
+.panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 60px;
+    box-sizing: border-box;
+}
+
+.about-us-panel {
+    background: linear-gradient(135deg, #ffffff, #f8f9fa);
+    z-index: 1;
+    border: 1px solid rgba(0, 156, 166, 0.1);
+}
+
+.shr-panel {
+    background: linear-gradient(135deg, var(--primary-teal), var(--dark-teal));
+    z-index: 2;
+    transform: translateY(100%);
+    color: var(--white-color);
+}
+
+.shr-panel h3, .shr-panel h2 {
+    color: var(--white-color);
+}
+
+.shr-panel .section-header .tagline,
+.shr-panel .shr-text-content p {
+    color: rgba(255,255,255,0.9);
+}
+
+.shr-panel .shr-benefit-icon {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: var(--white-color);
+}
+
+/* Content Layout */
+.about-us-grid,
+.shr-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 60px;
+    align-items: center;
+    width: 100%;
+    max-width: 1100px;
+}
+
+.shr-grid {
+    grid-template-columns: 1fr 1fr;
+}
+
+.about-us-text p {
+    font-size: 18px;
+    line-height: 1.8;
+    color: var(--text-light);
+}
+
+.about-us-points .point-item {
+    display: flex;
+    gap: 25px;
+    align-items: flex-start;
+    margin-bottom: 35px;
+    padding: 25px;
+    background: rgba(0, 156, 166, 0.05);
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 156, 166, 0.1);
+}
+
+.about-us-points .point-item:hover {
+    transform: translateX(10px);
+    background: rgba(0, 156, 166, 0.08);
+    box-shadow: 0 8px 25px rgba(0, 156, 166, 0.15);
+}
+
+.about-us-points .point-item:last-child { 
+    margin-bottom: 0; 
+}
+
+.about-us-points .point-icon {
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-teal), var(--dark-teal));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white-color);
+    box-shadow: 0 8px 20px rgba(0, 156, 166, 0.3);
+}
+
+.about-us-points .point-icon svg { 
+    width: 28px; 
+    height: 28px; 
+}
+
+.about-us-points h3 { 
+    margin: 0 0 10px 0; 
+    font-size: 20px; 
+    font-weight: 700; 
+    color: var(--text-color);
+}
+
+.about-us-points p { 
+    margin: 0; 
+    color: var(--text-light); 
+    font-size: 15px; 
+    line-height: 1.7; 
+}
+
+.shr-text-content p {
+    font-size: 18px;
+    line-height: 1.8;
+    margin-bottom: 25px;
+}
+
+.shr-benefits {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.shr-benefit-item { 
+    display: flex; 
+    align-items: flex-start; 
+    gap: 20px;
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.shr-benefit-item:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.shr-benefit-icon {
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.shr-benefit-icon svg { 
+    width: 26px; 
+    height: 26px; 
+}
+
+.shr-benefit-item h3 { 
+    margin: 0 0 8px 0; 
+    font-size: 18px; 
+    font-weight: 700; 
+}
+
+.shr-benefit-item p { 
+    margin: 0; 
+    font-size: 15px; 
+    line-height: 1.6; 
+    opacity: 0.9;
+}
+
+/* === RESPONSIVE DESIGN === */
+@media (max-width: 1200px) {
+    .sliding-panel-container {
+        height: 90vh;
+        max-height: 700px;
+    }
+    
+    .panel {
+        padding: 60px 40px;
+    }
+    
+    .about-us-grid,
+    .shr-grid {
+        gap: 40px;
+    }
+}
+
+ 
+
+ 
+
+@media (max-width: 576px) {
+    .sliding-panel-container {
+        height: 85vh;
+        max-height: 450px;
+    }
+    
+    .about-us-points .point-item {
+        padding: 12px;
+        gap: 12px;
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .about-us-points .point-icon {
+        margin: 0 auto 10px;
+    }
+    
+    .shr-benefit-item {
+        padding: 15px;
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+    }
+    
+    .shr-benefit-icon {
+        margin: 0 auto 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .sliding-section-wrapper {
+        padding: 80px 0 40px 0;
+    }
+    
+    .sliding-panel-container {
+        border-radius: 25px;
+    }
+    
+    .panel {
+        padding: 40px 20px;
+        min-height: 400px;
+    }
+    
+    .about-us-text p {
+        font-size: 16px;
+    }
+    
+    .about-us-points .point-item {
+        padding: 15px;
+        margin-bottom: 20px;
+        gap: 15px;
+    }
+    
+    .about-us-points .point-icon {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .about-us-points .point-icon svg {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .about-us-points h3 {
+        font-size: 18px;
+    }
+    
+    .about-us-points p {
+        font-size: 14px;
+    }
+    
+    .shr-text-content p {
+        font-size: 16px;
+    }
+    
+    .shr-benefit-item {
+        padding: 20px;
+        gap: 15px;
+    }
+    
+    .shr-benefit-icon {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .shr-benefit-icon svg {
+        width: 22px;
+        height: 22px;
+    }
+    
+    .shr-benefit-item h3 {
+        font-size: 16px;
+    }
+    
+    .shr-benefit-item p {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 576px) {
+    .panel {
+        padding: 30px 15px;
+        min-height: 350px;
+    }
+    
+    .about-us-points .point-item {
+        padding: 12px;
+        gap: 12px;
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .about-us-points .point-icon {
+        margin: 0 auto 10px;
+    }
+    
+    .shr-benefit-item {
+        padding: 15px;
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+    }
+    
+    .shr-benefit-icon {
+        margin: 0 auto 10px;
+    }
+}
+
+.hero-slider-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 40px;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding-bottom: 0px;
+}
+
+.hero-video-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 35%; /* This shifts the video's focus down */
+    z-index: 0;
+}
+
+.hero-slider-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 127, 135, 0);
+    z-index: 1;
+}
+        
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 30px;
+    justify-content: center;
+}
+
+/* Hide last 2 items on desktop */
+.benefit-item-hidden,
+.benefit-item-mobile-only {
+    display: none;
+}
+
+@media (max-width: 992px) {
+    .benefits-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    /* Show 6 items on mobile/tablet */
+    .benefit-item-mobile-only {
+        display: block;
+    }
+    
+    .benefit-item-hidden {
+        display: none;
+    }
+}
+
+@media (max-width: 576px) {
+    .benefits-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+}
+
+/* Mobile Header - Hide button, keep hamburger */
+@media (max-width: 992px) {
+    .header-actions {
+        display: none;
+    }
+    
+    .mobile-menu-toggle {
+        display: flex;
+        margin-left: auto;
+    }
+}
+
+/* Mobile Hero Section */
+@media (max-width: 768px) {
+    .hero-section {
+        min-height: 100vh;
+        padding: 0;
+    }
+    
+    .hero-slider-container {
+        min-height: 100vh;
+        border-radius: 0;
+        padding-bottom: 20px;
+    }
+    
+    .hero-slider-track {
+        min-height: 100vh;
+    }
+    
+    .hero-slide {
+        min-height: 100vh;
+        padding: 60px 20px 40px;
+        gap: 30px;
+        justify-content: center;
+    }
+    
+    .hero-content {
+        order: 1;
+        text-align: center;
+    }
+    
+    .hero-content h1 {
+        font-size: 28px;
+        line-height: 1.2;
+        margin-bottom: 15px;
+    }
+    
+    .hero-content p {
+        font-size: 16px;
+        margin-bottom: 25px;
+        line-height: 1.5;
+    }
+    
+    .hero-image-area {
+        order: 2;
+        margin-top: 0;
+        margin-bottom: 20px;
+    }
+    
+    .hero-image {
+        width: 280px;
+        height: 160px;
+        font-size: 16px;
+        margin: 0 auto;
+    }
+    
+    .hero-nav .arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
+    
+    .hero-nav {
+        left: 15px;
+        right: 15px;
+    }
+    
+    .hero-dots {
+        bottom: 20px;
+    }
+    
+    .hero-dots .dot {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-slide {
+        padding: 80px 15px 30px;
+        gap: 25px;
+    }
+    
+    .hero-content h1 {
+        font-size: 24px;
+        margin-bottom: 12px;
+    }
+    
+    .hero-content p {
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+    
+    .hero-image {
+        width: 250px;
+        height: 140px;
+        font-size: 14px;
+    }
+    
+    .btn {
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+}
+
+/* Ensure mobile menu positioning */
+@media (max-width: 992px) {
+    .main-header .container {
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .logo-placeholder {
+        flex: 1;
+    }
+}
+
+/* Fix mobile hero section width and overflow */
+@media (max-width: 768px) {
+    body {
+        overflow-x: hidden;
+    }
+    
+    .hero-section {
+        min-height: 100vh;
+        padding: 0;
+        width: 100%;
+        overflow: hidden;
+    }
+    
+    .hero-section .container {
+        padding: 0;
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .hero-slider-container {
+        min-height: 100vh;
+        border-radius: 0;
+        padding-bottom: 20px;
+        width: 100vw;
+        max-width: 100vw;
+        overflow: hidden;
+    }
+    
+    .hero-slider-track {
+        min-height: 100vh;
+        width: 100%;
+        display: flex;
+    }
+    
+    .hero-slide {
+        min-width: 100vw;
+        width: 100vw;
+        max-width: 100vw;
+        min-height: 100vh;
+        padding: 60px 20px 40px;
+        gap: 30px;
+        justify-content: center;
+        flex-shrink: 0;
+        box-sizing: border-box;
+    }
+    
+    .hero-content {
+        order: 1;
+        text-align: center;
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .hero-content h1 {
+        font-size: 28px;
+        line-height: 1.2;
+        margin-bottom: 15px;
+        word-wrap: break-word;
+    }
+    
+    .hero-content p {
+        font-size: 16px;
+        margin-bottom: 25px;
+        line-height: 1.5;
+    }
+    
+    .hero-image-area {
+        order: 2;
+        margin-top: 0;
+        margin-bottom: 20px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .hero-image {
+        width: 280px;
+        height: 160px;
+        font-size: 16px;
+        flex-shrink: 0;
+    }
+    
+    .hero-nav .arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
+    
+    .hero-nav {
+        left: 15px;
+        right: 15px;
+    }
+    
+    .hero-dots {
+        bottom: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-slide {
+        min-width: 100vw;
+        width: 100vw;
+        padding: 80px 15px 30px;
+        gap: 25px;
+    }
+    
+    .hero-content h1 {
+        font-size: 24px;
+        margin-bottom: 12px;
+    }
+    
+    .hero-content p {
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+    
+    .hero-image {
+        width: 250px;
+        height: 140px;
+        font-size: 14px;
+    }
+}
+
+/* Performance optimizations for sliding panels */
+.sliding-panel-container {
+    will-change: transform;
+    transform: translateZ(0); /* Force hardware acceleration */
+}
+
+.shr-panel {
+    will-change: transform;
+    transform: translateZ(0) translateY(100%); /* Force hardware acceleration and initial position */
+    backface-visibility: hidden; /* Prevent flickering */
+}
+
+.about-us-panel {
+    will-change: auto; /* Only animate when needed */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* Smooth scrolling for better experience */
+html {
+    scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    
+    /* Disable animations for users who prefer reduced motion */
+    .shr-panel {
+        transform: none !important;
+        position: relative !important;
+        margin-top: 40px;
+    }
+}
+
+@media (max-width: 992px) {
+    .sliding-panel-container {
+        height: 100vh;
+        max-height: 600px;
+        min-height: 500px;
+    }
+    
+    .panel {
+        padding: 40px 20px;
+    }
+    
+    .about-us-grid, 
+    .shr-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .about-us-points .point-item {
+        padding: 15px;
+        margin-bottom: 20px;
+        gap: 15px;
+    }
+    
+    .shr-benefits {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+}
+/* Hide sliding section completely on mobile */
+@media (max-width: 992px) {
+    .sliding-section-wrapper {
+        display: none !important;
+    }
+}
+/* === START: BULLETPROOF CONTACT FORM STYLES === */
+/* These styles use unique class names to avoid all conflicts. */
+
+.c-form-container h3 {
+    font-size: 24px;
+    margin-bottom: 30px;
+    font-weight: 600;
+    color: var(--white-color);
+}
+
+.c-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.c-form__group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 18px;
+    gap: 15px;
+}
+
+.c-form__label {
+    flex-basis: 120px;
+    flex-shrink: 0;
+    font-weight: 500;
+    text-align: right;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.c-form__input,
+.c-form__textarea,
+.c-form__select {
+    flex-grow: 1;
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--white-color);
+    font-family: var(--primary-font);
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.c-form__input::placeholder,
+.c-form__textarea::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.c-form__input:focus,
+.c-form__textarea:focus,
+.c-form__select:focus {
+    outline: none;
+    border-color: var(--white-color);
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+}
+
+.c-form__select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 18px center;
+    background-repeat: no-repeat;
+    background-size: 16px;
+    cursor: pointer;
+}
+
+.c-form__select option {
+    background-color: var(--dark-teal);
+    color: white;
+}
+
+.c-form__group--vertical {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+}
+
+.c-form__group--vertical .c-form__label {
+    text-align: left;
+    flex-basis: auto;
+}
+
+.c-form__textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.c-form__group--submit {
+    margin-top: 15px;
+}
+
+.c-form__button {
+    width: 100%;
+    padding: 16px 32px;
+    border-radius: 50px;
+    border: none;
+    background-color: var(--white-color);
+    color: var(--primary-teal);
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.c-form__button:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* === END: BULLETPROOF CONTACT FORM STYLES === */
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container">
+            <div class="logo-placeholder">
+                <img  style="height: 40px;" src="https://www.depilconcept.sk/images/logo.png" >
+            </div>
+            
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <nav class="main-nav" id="main-nav">
+                <ul>
+                    <li><a href="#">Domov</a></li>
+                    <li><a href="#">Ošetrenia</a></li>
+                    <li><a href="#">Technológia</a></li>
+                    <li><a href="#">O nás</a></li>
+                    <li><a href="#">Pobočky</a></li>
+                    <li><a href="#">Kontakt</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="#" class="btn btn-primary">Rezervácia</a>
+            </div>
+        </div>
+        
+        <div class="mobile-overlay" id="mobile-overlay"></div>
+    </header>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section class="hero-section">
+            <div class="hero-slider-container">
+                <video class="hero-video-bg" autoplay muted loop playsinline>
+                    <source src="01_depil_brand_video.mov" type="video/mp4">
+                    </video>
+                <div class="hero-slider-track">
+                    <div class="hero-slide">
+                        <div class="hero-content">
+                            <h1>Bezbolestná trvalá epilácia SHR in Motion</h1>
+                            <p>Dve moderné kliniky v Košiciach s písomnou zárukou výsledkov.</p>
+                            <a href="#" class="btn btn-secondary">ZISTITE VIAC →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- BENEFITS SECTION -->
+        <section class="benefits-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Naše výhody</h2>
+                    <p class="tagline">Prečo si vybrať DepilConcept v Košiciach</p>
+                </div>
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <div class="icon-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" /></svg>
+                        </div>
+                        <p>Bezbolestnosť</p>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="icon-wrapper">
+                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="10"/></svg>
+                        </div>
+                        <p>Rýchlosť</p>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="icon-wrapper">
+                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /><path d="M2 12h20"/></svg>
+                        </div>
+                        <p>Univerzálnosť</p>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="icon-wrapper">
+                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                        </div>
+                        <p>Bezpečnosť</p>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="icon-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                        </div>
+                        <p>Kvalita a certifikácia</p>
+                    </div>
+                    <div class="benefit-item benefit-item-mobile-only">
+                        <div class="icon-wrapper">
+                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                        </div>
+                        <p>Lokalita</p>
+                    </div>
+                    <div class="benefit-item benefit-item-hidden">
+                        <div class="icon-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg>
+                        </div>
+                        <p>Skúsenosti a dôvera</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SERVICES SECTION -->
+        <section class="our-services-section">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-number">1</p>
+                    <h2>Naše služby</h2>
+                    <p class="tagline">Používame najmodernejšie technológie a osvedčené postupy pre dokonalé výsledky</p>
+                </div>
+                <div class="services-card-grid">
+                    <!-- Card 1 -->
+                    <div class="service-card">
+                        <div class="service-card-image">
+                            <img src="https://i.postimg.cc/RVQ1991R/vic-31.jpg" alt="Trvalá epilácia SHR in Motion">
+                        </div>
+                        <div class="service-card-content">
+                            <h3>Trvalá epilácia SHR in Motion</h3>
+                            <p>Najmodernejšia technológia Super Hair Removal s In Motion systémom pre bezbolestné a rýchle odstránenie chĺpkov.</p>
+                            <ul class="service-features">
+                                <li>Bezbolestná metóda</li>
+                                <li>Až 30% redukcia po 1. ošetrení</li>
+                                <li>Všetky typy pokožky</li>
+                                <li>Aj svetlé vlasy</li>
+                            </ul>
+                            <a href="#" class="btn-tertiary">REZERVOVAŤ KONZULTÁCIU</a>
+                        </div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="service-card">
+                        <div class="service-card-image">
+                            <img src="https://i.postimg.cc/DZddxTzm/vic-3.jpg" alt="Fototerapia E-LIGHT">
+                        </div>
+                         <div class="service-card-content">
+                            <h3>Fototerapia E-LIGHT</h3>
+                            <p>Kombinácia IPL a rádiofrekvencie pre komplexné omladenie pleti, liečbu akné, redukciu vrások a pigmentových škvŕn.</p>
+                             <ul class="service-features">
+                                <li>Omladenie pleti</li>
+                                <li>Redukcia vrások</li>
+                                <li>Liečba akné</li>
+                                <li>Odstránenie pigmentácie</li>
+                            </ul>
+                             <a href="#" class="btn-tertiary">REZERVOVAŤ KONZULTÁCIU</a>
+                        </div>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="service-card">
+                        <div class="service-card-image">
+                             <img src="https://i.postimg.cc/RCdLf48D/vic-9.jpg" alt="Depilácia voskom a ďalšie služby">
+                        </div>
+                         <div class="service-card-content">
+                            <h3>Depilácia voskom a ďalšie</h3>
+                            <p>Kompletné spektrum kozmetických služieb vrátane depilácie voskom, LashLift ošetrení a úpravy obočia.</p>
+                             <ul class="service-features">
+                                <li>Horúci a studený vosk</li>
+                                <li>LashLift ošetrenie</li>
+                                <li>Úprava obočia</li>
+                                <li>Okamžité výsledky</li>
+                            </ul>
+                             <a href="#" class="btn-tertiary">REZERVOVAŤ KONZULTÁCIU</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDING SECTION -->
+        <section class="sliding-section-wrapper">
+            <div class="container">
+                <div class="sliding-panel-container" id="sliding-container">
+                    <!-- Panel 1: About Us -->
+                    <div class="panel about-us-panel">
+                        <div class="section-header">
+                            <p class="section-number">2</p>
+                            <h2>O nás</h2>
+                            <p class="tagline">Vaše lokálne kliniky značky DepilConcept</p>
+                        </div>
+                        <div class="about-us-grid">
+                            <div class="about-us-text">
+                                <p>Dve moderné kliniky v Košiciach s medzinárodným know-how, ktoré prinášajú svetové štandardy v oblasti trvalej epilácie a kozmetických služieb priamo k vám. Naša filozofia je postavená na kombinácii najnovších technológií, individuálneho prístupu a garancie viditeľných výsledkov.</p>
+                            </div>
+                            <div class="about-us-points">
+                                <div class="point-item">
+                                    <div class="point-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                                    </div>
+                                    <div>
+                                        <h3>Kvalita a certifikácia</h3>
+                                        <p>Pracujeme podľa štandardov portugalskej značky DepilConcept s viac ako 17-ročnými skúsenosťami a písomnou zárukou výsledkov.</p>
+                                    </div>
+                                </div>
+                                <div class="point-item">
+                                    <div class="point-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                                    </div>
+                                    <div>
+                                        <h3>Lokalita a prístupnosť</h3>
+                                        <p>Dve strategicky umiestnené kliniky v Košiciach - v centre mesta (DUETT) a na Werferovej ulici (ASTON BUILDING).</p>
+                                    </div>
+                                </div>
+                                <div class="point-item">
+                                    <div class="point-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg>
+                                    </div>
+                                    <div>
+                                        <h3>Skúsenosti a dôvera</h3>
+                                        <p>Pobočka DUETT bola historicky prvá pobočka na Slovensku, čo dokumentuje naše dlhoročné skúsenosti v regióne.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Panel 2: SHR Technology -->
+                    <div class="panel shr-panel">
+                         <div class="shr-grid">
+                            <div class="shr-text-content">
+                                <div class="section-header" style="text-align: left; margin-bottom: 30px;">
+                                    <h2 style="font-size: 32px; color: var(--white-color);">SHR in Motion - Revolúcia v epilácii</h2>
+                                </div>
+                                <p>V našich košických klinikách používame najmodernejšiu technológiu Super Hair Removal s In Motion systémom. Táto metóda postupne zohrieva vlasové folikuly pomocou viacerých prekrývajúcich sa impulzov nízkej energie.</p>
+                                <p>Kľúčovou výhodou je "In Motion" systém - ošetrenie sa vykonáva v pohybe, čo zaručuje rovnomerné pokrytie a výrazne zvyšuje komfort pacienta. Môžeme účinne odstraňovať aj svetlé vlasy, čo bolo doteraz veľmi náročné.</p>
+                            </div>
+                            <div class="shr-benefits">
+                                <div class="shr-benefit-item">
+                                    <div class="shr-benefit-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                                    </div>
+                                    <div>
+                                        <h3>Bezbolestnosť</h3>
+                                        <p>Nízka energia impulzov eliminuje bolesť</p>
+                                    </div>
+                                </div>
+                                <div class="shr-benefit-item">
+                                    <div class="shr-benefit-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="10"/></svg>
+                                    </div>
+                                    <div>
+                                        <h3>Rýchlosť</h3>
+                                        <p>Celé telo za 1 hodinu mesačne</p>
+                                    </div>
+                                </div>
+                                <div class="shr-benefit-item">
+                                    <div class="shr-benefit-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg>
+                                    </div>
+                                    <div>
+                                        <h3>Univerzálnosť</h3>
+                                        <p>Všetky typy pokožky a farieb vlasov</p>
+                                    </div>
+                                </div>
+                                <div class="shr-benefit-item">
+                                    <div class="shr-benefit-icon">
+                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                                    </div>
+                                    <div>
+                                        <h3>Bezpečnosť</h3>
+                                        <p>Aj počas leta na opálenej pokožke</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mobile-only About Section (hidden on desktop) -->
+<section class="mobile-about-section">
+    <div class="container">
+        <!-- Your mobile-friendly about content here -->
+    </div>
+</section>
+
+        <!-- STATS SECTION -->
+        <section class="stats-section" id="stats-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 style="color: white;">Lokálne výsledky s medzinárodnou kvalitou</h2>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="2">0</div>
+                        <div class="stat-text">moderné kliniky v Košiciach</div>
+                        <div class="stat-label">LOKÁLNE</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="250">0</div>
+                        <div class="stat-text">kliník značky vo svete</div>
+                        <div class="stat-label">GLOBÁLNE</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="5000">0</div>
+                        <div class="stat-text">spokojných klientov ročne</div>
+                        <div class="stat-label">KLIENTI</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="17">0</div>
+                        <div class="stat-text">rokov skúseností značky</div>
+                        <div class="stat-label">EXPERTÍZA</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LOCATIONS SECTION -->
+        <section class="locations-v2-section">
+            <div class="container">
+                <div class="locations-v2-header">
+                    <h2>Naše pobočky v Košiciach</h2>
+                    <p>Nájdete nás na dvoch strategicky umiestnených adresách.</p>
+                </div>
+                <div class="locations-v2-main">
+                    <div class="locations-v2-cards">
+                        <div class="location-v2-card" data-target="duett">
+                            <h3>DepilConcept DUETT</h3>
+                            <p>Naša historicky prvá pobočka na Slovensku, umiestnená v srdci mesta.</p>
+                            <address class="location-v2-address">
+                                Štúrova 5/4, 040 01 Košice - Centrum<br>
+                                (Obchodné centrum DUETT)
+                            </address>
+                        </div>
+
+                        <div class="location-v2-card" data-target="werferova">
+                            <h3>DepilConcept Werferova</h3>
+                            <p>Moderná klinika s kompletným spektrom služieb a najnovším vybavením.</p>
+                            <address class="location-v2-address">
+                                Werferova 3782/6, 040 11 Košice<br>
+                                (ASTON BUILDING)
+                            </address>
+                        </div>
+                    </div>
+                    
+                    <div class="locations-v2-image-viewer">
+                        <div class="location-v2-image is-active" id="img-default" style="background-image: url('https://i.postimg.cc/XJpHLrhx/Duett-2.jpg');"></div>
+                        <div class="location-v2-image" id="img-duett" style="background-image: url('https://i.postimg.cc/XJpHLrhx/Duett-2.jpg');"></div>
+                        <div class="location-v2-image" id="img-werferova" style="background-image: url('https://i.postimg.cc/qB6DCC2v/aston.jpg');"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section class="contact-section">
+            <div class="container">
+                <div class="contact-header">
+                    <h2>Kontaktujte nás</h2>
+                    <p>Sme tu pre vás a radi zodpovieme všetky vaše otázky o našich službách. Rezervujte si bezplatnú konzultáciu v jednej z našich košických kliník.</p>
+                </div>
+                
+                <div class="contact-main-grid">
+                    <div class="contact-details">
+                        <h3>Kontaktné údaje</h3>
+                        <div class="contact-card">
+                             <div class="icon-wrapper">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                            </div>
+                            <div>
+                                <h4>Hlavný kontakt</h4>
+                                <a href="mailto:info@depilconcept-kosice.sk">info@depilconcept-kosice.sk</a>
+                                <p><a href="tel:+421552208920">+421 55 220 8920</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-card">
+                             <div class="icon-wrapper">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                            </div>
+                            <div>
+                                <h4>DUETT - Centrum</h4>
+                                <address>
+                                    <p>Štúrova 5/4, 040 01 Košice</p>
+                                    <a href="tel:+421556222891">Tel: +421 55 622 2891</a>
+                                </address>
+                            </div>
+                        </div>
+                        <div class="contact-card">
+                             <div class="icon-wrapper">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                            </div>
+                            <div>
+                                <h4>Werferova - ASTON</h4>
+                                <address>
+                                   <p>Werferova 3782/6, 040 11 Košice</p>
+                                   <a href="tel:+421552208920">Tel: +421 55 220 8920</a>
+                                </address>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="c-form-container">
+                        <h3>Napíšte nám správu</h3>
+                        <form id="contact-form" class="c-form" action="#" method="POST">
+                            
+                            <div class="c-form__group">
+                                <label for="name" class="c-form__label">Meno</label>
+                                <input type="text" id="name" name="name" class="c-form__input" placeholder="Vaše meno" required>
+                            </div>
+                    
+                            <div class="c-form__group">
+                                <label for="email" class="c-form__label">Email</label>
+                                <input type="email" id="email" name="email" class="c-form__input" placeholder="vas@email.com" required>
+                            </div>
+                    
+                            <div class="c-form__group">
+                                <label for="phone" class="c-form__label">Telefón</label>
+                                <input type="tel" id="phone" name="phone" class="c-form__input" placeholder="+421 xxx xxx xxx" required>
+                            </div>
+                    
+                            <div class="c-form__group">
+                                <label for="service-interest" class="c-form__label">O čo máte záujem?</label>
+                                <select id="service-interest" name="service_interest" class="c-form__select" required>
+                                    <option value="">Vyberte službu</option>
+                                    <option value="shr-epilacia">Trvalá epilácia SHR - bezbolestná</option>
+                                    <option value="elight-omladenie">E-LIGHT omladenie pleti</option>
+                                    <option value="depi-vosk">Depilácia voskom</option>
+                                    <option value="lashlift">LashLift ošetrenie</option>
+                                    <option value="komplet-balicek">Kompletný balíček služieb</option>
+                                    <option value="konzultacia">Len bezplatná konzultácia</option>
+                                </select>
+                            </div>
+                    
+                            <div class="c-form__group c-form__group--vertical">
+                                <label for="message" class="c-form__label">Vaša správa</label>
+                                <textarea id="message" name="message" rows="5" class="c-form__textarea" placeholder="Ak máte otázky alebo špecifické požiadavky, napíšte nám..."></textarea>
+                            </div>
+                    
+                            <div class="c-form__group c-form__group--submit">
+                                <button type="submit" class="c-form__button">Odoslať správu</button>
+                            </div>
+                    
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <h3>DepilConcept Košice</h3>
+                    <p>Dve moderné kliniky v Košiciach s medzinárodnou kvalitou značky DepilConcept. Špecializujeme sa na bezbolestné ošetrenia s písomnou zárukou výsledkov.</p>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Služby</h4>
+                    <ul>
+                        <li><a href="#">Trvalá epilácia SHR</a></li>
+                        <li><a href="#">Fototerapia E-LIGHT</a></li>
+                        <li><a href="#">Depilácia voskom</a></li>
+                        <li><a href="#">LashLift</a></li>
+                        <li><a href="#">Úprava obočia</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Naše kliniky</h4>
+                     <ul>
+                        <li><a href="#">DUETT - Centrum</a></li>
+                        <li><a href="#">Werferova - ASTON</a></li>
+                        <li><a href="#">Prevádzkové hodiny</a></li>
+                        <li><a href="#">Parkovanie</a></li>
+                        <li><a href="#">Dostupnosť</a></li>
+                    </ul>
+                </div>
+
+                 <div class="footer-links">
+                    <h4>Podpora</h4>
+                    <ul>
+                        <li><a href="#">Kontakt</a></li>
+                        <li><a href="#">Rezervácia</a></li>
+                        <li><a href="#">Často kladené otázky</a></li>
+                        <li><a href="#">Podmienky použitia</a></li>
+                        <li><a href="#">Ochrana údajov</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>© 2025 DepilConcept Košice. Všetky práva vyhradené. | Značka DepilConcept založená v Portugalsku v roku 2007</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- GSAP Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    // This is the main wrapper. It ensures all code inside only runs AFTER the page is fully loaded.
+
+    // --- 1. PAGE LOAD SCROLL ---
+    // This safely scrolls the page down by 100px on load.
+    // --- 1. PAGE LOAD SCROLL (MOBILE ONLY) ---
+if (window.innerWidth <= 768) {
+    setTimeout(function() {
+        window.scrollTo({ top: 100, behavior: 'auto' });
+    }, 10);
+}
+
+    // --- 2. MOBILE MENU ---
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mainNav = document.getElementById('main-nav');
+    const mobileOverlay = document.getElementById('mobile-overlay');
+
+    if (mobileMenuToggle && mainNav && mobileOverlay) {
+        const toggleMenu = () => {
+            const isActive = mainNav.classList.contains('active');
+            mainNav.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            document.body.style.overflow = !isActive ? 'hidden' : '';
+        };
+
+        const closeMenu = () => {
+            mainNav.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        };
+
+        mobileMenuToggle.addEventListener('click', toggleMenu);
+        mobileOverlay.addEventListener('click', closeMenu);
+
+        const navLinks = mainNav.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 992) {
+                closeMenu();
+            }
+        });
+    }
+
+    // --- 3. GSAP SLIDING PANEL ANIMATION ---
+    gsap.registerPlugin(ScrollTrigger);
+    const slidingContainer = document.querySelector('.sliding-panel-container');
+    const shrPanel = document.querySelector('.shr-panel');
+
+    if (slidingContainer && shrPanel) {
+        let tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: slidingContainer,
+                pin: true,
+                start: "center center",
+                end: "+=100%",
+                scrub: 0.5,
+            }
+        });
+        
+        tl.to(shrPanel, {    
+            yPercent: -100,
+            ease: "none"
+        });
+
+        // Refresh ScrollTrigger on window resize with debouncing
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                ScrollTrigger.refresh();
+            }, 250);
+        });
+    }
+
+    // --- 4. STATS COUNTER ---
+    const statsSection = document.getElementById('stats-section');
+    if (statsSection) {
+        const counters = statsSection.querySelectorAll('.stat-number');
+        let hasAnimated = false;
+
+        const animateCounter = (counter) => {
+            const target = +counter.getAttribute('data-target');
+            const duration = 2000;
+            const startTime = performance.now();
+
+            const updateCount = (currentTime) => {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+                const current = Math.floor(easeOutQuart * target);
+                
+                counter.textContent = current.toLocaleString('sk-SK');
+                
+                if (progress < 1) {
+                    requestAnimationFrame(updateCount);
+                } else {
+                    // Add '+' sign to the last counter if needed
+                    let finalText = target.toLocaleString('sk-SK');
+                    if (counter.getAttribute('data-target') === '17') {
+                         finalText += '+';
+                    }
+                    counter.textContent = finalText;
+                }
+            };
+            requestAnimationFrame(updateCount);
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !hasAnimated) {
+                    hasAnimated = true;
+                    counters.forEach(animateCounter);
+                    observer.unobserve(statsSection); // Stop observing after animation runs
+                }
+            });
+        }, {
+            threshold: 0.5
+        });
+        observer.observe(statsSection);
+    }
+
+    // --- 5. LOCATIONS INTERACTION ---
+    const locationCards = document.querySelectorAll('.location-v2-card');
+    const locationImages = document.querySelectorAll('.location-v2-image');
+    const locationsMainContainer = document.querySelector('.locations-v2-main');
+
+    if (locationCards.length > 0 && locationImages.length > 0) {
+        locationCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                const targetId = `img-${this.dataset.target}`;
+                
+                locationCards.forEach(c => c.classList.remove('is-active'));
+                this.classList.add('is-active');
+
+                locationImages.forEach(img => {
+                    img.classList.toggle('is-active', img.id === targetId);
+                });
+            });
+        });
+
+        if (locationsMainContainer) {
+            locationsMainContainer.addEventListener('mouseleave', function() {
+                locationCards.forEach(c => c.classList.remove('is-active'));
+                locationImages.forEach(img => {
+                    // Show the default image on mouse leave
+                    img.classList.toggle('is-active', img.id === 'img-default');
+                });
+            });
+        }
+    }
+
+    // --- 6. CONTACT FORM HANDLING ---
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = this.querySelector('.btn-submit');
+            const originalText = submitBtn.textContent;
+            
+            submitBtn.textContent = 'Odosiela sa...';
+            submitBtn.disabled = true;
+            
+            // Simulate form submission
+            setTimeout(() => {
+                submitBtn.textContent = 'Odoslané ✓';
+                submitBtn.style.backgroundColor = '#28a745'; // Success green
+                submitBtn.style.color = 'white';
+
+                setTimeout(() => {
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                    submitBtn.style.backgroundColor = ''; // Revert to original styles
+                    submitBtn.style.color = '';
+                    this.reset();
+                }, 2500);
+            }, 1000);
+        });
+    }
+
+}); // End of the main DOMContentLoaded wrapper
+    </script>
+
+</body>
+</html>
